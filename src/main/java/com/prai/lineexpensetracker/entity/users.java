@@ -49,8 +49,5 @@ public class users {
 
 
 
-//    display_name|line_user_id|status(active/blocked)|connected_at|block_at
-
-
 
 }
