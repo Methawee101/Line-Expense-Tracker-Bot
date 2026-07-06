@@ -1,10 +1,8 @@
 package com.prai.lineexpensetracker.entity;
 
 import com.prai.lineexpensetracker.enums.TypeTransaction;
-import com.prai.lineexpensetracker.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
-import org.apache.catalina.User;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -18,7 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 
-public class transactions {
+public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
