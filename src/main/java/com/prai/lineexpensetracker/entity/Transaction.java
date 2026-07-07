@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -38,19 +38,19 @@ public class Transaction {
     private BigDecimal amount;
 
     @Column(name = "transaction_date")
-    private LocalDateTime transactionDate;
+    private LocalDate transactionDate;
 
     @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @PrePersist
     public void prePersist() {
         if(transactionDate == null) {
-            transactionDate =LocalDateTime.now();
+            transactionDate =LocalDate.now();
         }
 
         if ( createdAt == null) {
-            createdAt = LocalDateTime.now();
+            createdAt = LocalDate.now();
         }
     }
 

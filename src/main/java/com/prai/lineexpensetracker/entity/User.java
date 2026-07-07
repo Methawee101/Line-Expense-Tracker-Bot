@@ -4,7 +4,7 @@ import com.prai.lineexpensetracker.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 
 @Data
@@ -31,10 +31,10 @@ public class User {
     private UserStatus status;
 
     @Column(name = "connect_at")
-    private LocalDateTime connectedAt;
+    private LocalDate connectedAt;
 
     @Column(name = "block_at")
-    private LocalDateTime blockedAt;
+    private LocalDate blockedAt;
 
     @PrePersist
     public void prePersist() {
@@ -43,7 +43,7 @@ public class User {
         }
 
         if ( connectedAt == null) {
-            connectedAt = LocalDateTime.now();
+            connectedAt = LocalDate.now();
         }
     }
 
