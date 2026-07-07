@@ -3,6 +3,7 @@ package com.prai.lineexpensetracker.dto.request;
 import com.prai.lineexpensetracker.enums.TypeTransaction;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,13 +18,13 @@ public class transactionRequest {
 
     private String displayName;
 
-    @NotBlank(message = "type is required")
+    @NotNull(message = "type is required")
     private TypeTransaction type;
 
     @NotBlank(message = "title is required")
     private String title;
 
-    @NotBlank(message = "amount is required")
+    @NotNull(message = "amount is required")
     @DecimalMin(value = "0.01", message = "amount must be greater than 0")
     private BigDecimal amount;
 

@@ -25,6 +25,7 @@ public class TransactionService {
         Transaction transaction = Transaction.builder()
                 .user(user)
                 .type(request.getType())
+                .title(request.getTitle())
                 .amount(request.getAmount())
                 .build();
         Transaction saveTransaction = transactionRepository.save(transaction);
@@ -44,7 +45,7 @@ public class TransactionService {
     }
 
     private  transactionResponse toResponse(Transaction transaction) {
-        User user = transaction.getUser();
+        User user = transaction.getUser(); //เพื่อ getUserID?
 
         return transactionResponse.builder()
                 .id(transaction.getId())
