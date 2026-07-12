@@ -23,4 +23,5 @@ public interface TransactionRepository extends JpaRepository<Transaction,Long> {
             LocalDate startDate,
             LocalDate endDate
     );
+
 }
