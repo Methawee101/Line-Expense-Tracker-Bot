@@ -9,10 +9,7 @@ import com.prai.lineexpensetracker.enums.TypeTransaction;
 import com.prai.lineexpensetracker.service.LineMessageService;
 import com.prai.lineexpensetracker.service.TransactionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.YearMonth;
@@ -25,6 +22,11 @@ import java.util.List;
 public class LineWebhookController {
     private final TransactionService transactionService;
     private final LineMessageService lineMessageService;
+
+    @GetMapping("/")
+    public String home() {
+        return "Line Expense Tracker Bot is running";
+    }
 
     @PostMapping
     public List<String> handleWebhook(@RequestBody lineWebhookRequest request){
