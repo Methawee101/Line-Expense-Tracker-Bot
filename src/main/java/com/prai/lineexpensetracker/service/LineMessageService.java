@@ -23,19 +23,33 @@ public class LineMessageService {
         try{
             System.out.println("=== SEND LINE REPLY ===");
             System.out.println("replyToken = " + replyToken);
+            System.out.println("message = " + message);
             System.out.println("token empty? = " +
                     (lineProperties.getChannelAccessToken() == null
                     || lineProperties.getChannelAccessToken().isBlank()));
 
-            Map<String,Object> body = Map.of(
-                    "replyToken",replyToken,
-                    "message", List.of(
-                            Map.of(
-                                    "type","text",
-                                    "text",message
-                            )
-                    )
+            if (replyToken == null || replyToken.isBlank()) {
+                System.out.println("Reply token is empty, skip reply");
+                return;
+            }
+
+            if (message == null || message.isBlank()) {
+                System.out.println("Message is empty, skip reply");
+                return;
+            }
+
+            Map<String, Object> textMessage = Map.of(
+                    "type", "text",
+                    "text", message
             );
+
+            Map<String, Object> body = Map.of(
+                    "replyToken", replyToken,
+                    "messages", List.of(textMessage)
+            );
+
+            System.out.println("LINE reply body = " + body);
+
             restClient.post()
                     .uri("/v2/bot/message/reply")
                     .contentType(MediaType.APPLICATION_JSON)
