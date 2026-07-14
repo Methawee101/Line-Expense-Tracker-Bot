@@ -26,6 +26,8 @@ public class LineWebhookController {
 
     @PostMapping
     public List<String> handleWebhook(@RequestBody lineWebhookRequest request){
+        System.out.println("=== LINE WEBHOOK RECEIVED ===");
+        System.out.println("events size = " + (request.getEvents() == null ? 0 : request.getEvents().size()));
         List<String> responses = new ArrayList<>();
         if(request.getEvents() == null){
             return responses;
