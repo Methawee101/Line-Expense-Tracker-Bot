@@ -1,5 +1,6 @@
 package com.prai.lineexpensetracker.service;
 
+import com.prai.lineexpensetracker.config.LineProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -24,9 +25,9 @@ public class LineMessageService {
             System.out.println("replyToken = " + replyToken);
             System.out.println("token empty? = " +
                     (lineProperties.getChannelAccessToken() == null
-                    || lineProperties.getChannelAccessToken().isBlank));
+                    || lineProperties.getChannelAccessToken().isBlank()));
 
-            Map<String,Object> body = MAp.of(
+            Map<String,Object> body = Map.of(
                     "replyToken",replyToken,
                     "message", List.of(
                             Map.of(
