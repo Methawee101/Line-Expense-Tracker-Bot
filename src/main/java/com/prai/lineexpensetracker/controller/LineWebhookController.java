@@ -23,10 +23,6 @@ public class LineWebhookController {
     private final TransactionService transactionService;
     private final LineMessageService lineMessageService;
 
-    @GetMapping("/")
-    public String home() {
-        return "Line Expense Tracker Bot is running";
-    }
 
     @PostMapping
     public List<String> handleWebhook(@RequestBody lineWebhookRequest request){
