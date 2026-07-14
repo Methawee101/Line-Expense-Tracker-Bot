@@ -6,6 +6,7 @@ import com.prai.lineexpensetracker.dto.request.transactionRequest;
 import com.prai.lineexpensetracker.dto.response.monthlySummaryResponse;
 import com.prai.lineexpensetracker.dto.response.transactionResponse;
 import com.prai.lineexpensetracker.enums.TypeTransaction;
+import com.prai.lineexpensetracker.service.LineMessageService;
 import com.prai.lineexpensetracker.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LineWebhookController {
     private final TransactionService transactionService;
+    private final LineMessageService lineMessageService;
 
     @PostMapping
     public List<String> handleWebhook(@RequestBody lineWebhookRequest request){
@@ -45,6 +47,7 @@ public class LineWebhookController {
             String text = event.getMessage().getText();
 
             String responseMessage = handleTextMessage(lineUserId, text);
+            lineMessageService.replyMessage(event.getReplyToken(),responseMessage);
             responses.add(responseMessage);
 //            transactionRequest transactionRequest = parseTextToRequest(lineUserId,text);
 

@@ -4,6 +4,7 @@ import com.prai.lineexpensetracker.dto.response.monthlySummaryResponse;
 import com.prai.lineexpensetracker.entity.User;
 import com.prai.lineexpensetracker.enums.UserStatus;
 import com.prai.lineexpensetracker.repository.UserRepository;
+import com.prai.lineexpensetracker.service.LineMessageService;
 import com.prai.lineexpensetracker.service.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,6 +18,7 @@ import java.util.List;
 public class monthlySummaryScheduler {
     private final UserRepository userRepository;
     private final TransactionService transactionService;
+    private final LineMessageService lineMessageService;
 
 //    ทุกวันที่ 1
     @Scheduled(cron = "0 0 9 1 * *")
@@ -33,8 +35,7 @@ public class monthlySummaryScheduler {
             String message = formatSummaryMessage(summary);
 
             // รอเชื่อม line
-            System.out.println("Send monthly summary to: " + user.getLineUserId());
-            System.out.println(message);
+            lineMessageService.pushMessage(user.getLineUserId(),message);
         }
     }
     private String formatSummaryMessage(monthlySummaryResponse summary) {
